@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Header } from './components/Header.jsx';
+import "./styles.css"
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello World!</h1>
+    <div className="app">
+      <Header />
     </div>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+
 
 
 /* //import { createState } from "./data/createState.js";
