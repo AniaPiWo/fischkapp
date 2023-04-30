@@ -1,0 +1,23 @@
+{
+  "name": "fischkapp",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">\r   Fischkapp 📄\r </h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AniaPiWo/fischkapp.git"
+  },
+  "author": "AniaPW",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AniaPiWo/fischkapp/issues"
+  },
+  "homepage": "https://github.com/AniaPiWo/fischkapp#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

@@ -1,4 +1,18 @@
-import { createState } from "./data/createState.js";
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Hello World!</h1>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
+/* //import { createState } from "./data/createState.js";
 import { createCardComponent } from "./ui/card.js";
 import { addCard } from "./data/actions.js";
 
@@ -21,3 +35,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log(`You have ${appState.flashcards.length} card/s.`);
 });
+ */
