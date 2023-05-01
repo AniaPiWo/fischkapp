@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Header } from './components/Header.jsx';
+import { NewCard } from './components/NewCard.jsx';
 import "./styles.css"
 
 const App = () => {
   return (
     <div className="app">
       <Header />
+      <NewCard />
     </div>
   );
 }
