@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Header } from './components/Header.jsx';
 import { NewCard } from './components/NewCard.jsx';
+import { Card } from './components/Card.jsx';
 import "./styles.css"
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
     <div className="app">
       <Header />
       <NewCard />
+      <Card />
     </div>
   );
 }
