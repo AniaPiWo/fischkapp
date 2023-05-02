@@ -7,7 +7,7 @@ export const NewCard = () => {
     return (
 
     <div>
-        <div id="new-card" className="new-card front">
+        <div id="new-card" className="card">
             <form action="">
                 <input defaultValue="Card front ..." />
             </form>
@@ -16,7 +16,7 @@ export const NewCard = () => {
                 <button className="btn-2">Next</button>
             </div>
         </div>
-        <div id="new-card" className="new-card back">
+        <div id="new-card" className="card">
             <div className="card-word">Card-word</div>
             <div className="trash-icon"> 
                 <TrashIcon />
