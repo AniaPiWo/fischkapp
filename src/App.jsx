@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header onAddCard={handleAddCard} />
+      <Header onAddCard={handleAddCard} cardsCount={cards.length}/>
       {showNewCard ? <NewCard onSaveCard={handleSaveCard} /> : null}
       <div className="cards-list">
         {cards.map((card, index) => (
