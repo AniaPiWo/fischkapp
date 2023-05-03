@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles.css";
 import { AddIcon } from "./AddIcon";
 
-export const Header = ({ onAddCard }) => {
+export const Header = ({ onAddCard, cardsCount }) => {
+
   const handleAddCard = () => {
     onAddCard();
   };
@@ -11,7 +12,7 @@ export const Header = ({ onAddCard }) => {
     <div id="app-header">
       <div className="title">
         fischkapp
-        <div id="counter">0</div>
+        <div id="counter">{cardsCount}</div>
       </div>
       <button className="add-button" onClick={handleAddCard}>
         <AddIcon />
