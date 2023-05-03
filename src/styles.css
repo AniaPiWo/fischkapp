@@ -48,9 +48,9 @@ body {
   font-family: "Raleway", sans-serif;
 }
 
-#app {
+.app {
   max-width: 375px;
-  height: 100%;
+  min-height: 800px;
   margin: 1% auto;
   background: #fff;
 }
@@ -137,7 +137,7 @@ body {
   cursor: pointer;
 }
 
-.card.front p{
+.card.front p {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,6 +145,10 @@ body {
   font-weight: 600;
   font-size: 18px;
   line-height: 21px;
+}
+
+.card.back p {
+text-align: start;
 }
 
 .card input, .card p {
@@ -213,4 +217,13 @@ body {
   left: 295px;
   color: #98A3CF;
   cursor: pointer;
+}
+
+.cards-list {
+  color: #98A3CF;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  padding-top: 36px;
 }
