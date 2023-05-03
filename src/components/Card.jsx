@@ -7,7 +7,6 @@ export const Card = ({front, back}) => {
 
 const [showBack, setShowBack] = useState(false);
 
-
 const handleSideSwitch = () => {
     (!showBack) ? setShowBack(true) : setShowBack(false);
   };
