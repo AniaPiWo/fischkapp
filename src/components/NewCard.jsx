@@ -21,6 +21,11 @@ export const NewCard = ({ onSaveCard, frontValue }) => {
   const handleFrontChange = (event) => {
     setFront(event.target.value);
   };
+  
+  const handleDeleteClick = () => {
+    console.log("delete click");
+  };
+
 
   return (
     <div>
@@ -48,8 +53,8 @@ export const NewCard = ({ onSaveCard, frontValue }) => {
         className="card"
         style={{ display: showBack ? "block" : "none" }}
       >
-        <div className="card-word">Card-word</div>
-        <div className="trash-icon">
+        <div className="card-word"></div>
+        <div className="trash-icon" onClick={handleDeleteClick}>
           <TrashIcon />
         </div>
         <form>
