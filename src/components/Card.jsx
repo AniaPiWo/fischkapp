@@ -1,69 +1,77 @@
-import React, {useState, useRef} from "react";
+import React, { useState } from "react";
 import "../styles.css";
 import { TrashIcon } from "./TrashIcon";
 import { PencilIcon } from "./PencilIcon.jsx";
 import ReactCardFlip from "react-card-flip";
 
-
-export const Card = ({ front, back }) => {
-  const [isBack, setShowBack] = useState(false);
-
+export const Card = ({ front, back, deleteCard }) => {
+  const [isBack, setIsBack] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleSideSwitch = () => {
-    setShowBack(!isBack);
+    setIsBack(!isBack);
+    setIsEdit(false);
+  };
+
+  const handleCardEdit = (event) => {
+    event.stopPropagation();
+    setIsEdit(true);
+    setIsBack(true);
+  };
+
+  const handleCancelEdit = (event) => {
+    event.stopPropagation();
+    setIsBack(false);
+    setIsEdit(false);
+  };
+
+  const handleSaveEdit = (event) => {
+    event.stopPropagation();
+    setIsBack(false);
+    setIsEdit(false);
+  };
+
+  const handleDeleteCard = (event) => {
+    event.stopPropagation();
+    deleteCard();
   };
 
   return (
     <div className="flip-card">
       <div onClick={handleSideSwitch}>
         <ReactCardFlip isFlipped={isBack} flipDirection="horizontal">
-            <div id="card-front" className="card read-mode">
-                <div className="pencil-icon">
-        <PencilIcon />
+          <div id="card-front" className="card read-mode">
+            <div className="pencil-icon" onClick={handleCardEdit}>
+              <PencilIcon />
+            </div>
+            <div>
+              <p>{front}</p>
+            </div>
+          </div>
+          {isEdit && isBack ? (
+            <div className="card edit-mode">
+              <div className="trash-icon" onClick={handleDeleteCard}>
+                <TrashIcon />
+              </div>
+              <div>
+                <input defaultValue={back} />
+              </div>
+              <div className="button-box">
+                <button className="btn-1" onClick={handleCancelEdit}>
+                  Cancel
+                </button>
+                <button className="btn-2" onClick={handleSaveEdit}>
+                  Save
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="card read-mode">
+              <p>{back}</p>
+            </div>
+          )}
+        </ReactCardFlip>
       </div>
-      <div>
-        <p>{front}</p>
-      </div>
-    </div>
-    <div id="card-back" className="card read-mode">
-      <div>
-        <p>{back}</p>
-      </div>
-    </div>
-  </ReactCardFlip>
-</div>
-
     </div>
   );
 };
-
-
- 
-
-{/* 
-Card Edit
-<div onClick={handleSideSwitch}>
-<div 
-  id="card-front" 
-  className="card front"
-  style={{ display: showBack ? "none" : "block" }}> 
-    <div className="trash-icon"> 
-        <TrashIcon />
-    </div>     
-    <div><p>{front}</p></div>
-</div>
-<div 
-  id="card-back" 
-  className="card"
-  style={{ display: showBack ? "block" : "none" }}>
-    <div className="trash-icon"> 
-        <TrashIcon />
-    </div>
-    <div><p>{back}</p></div>
-    <div className="button-box">
-        <button className="btn-1">Cancel</button>
-        <button className="btn-2">Save</button>
-    </div>
-</div>
-</div>
- */}

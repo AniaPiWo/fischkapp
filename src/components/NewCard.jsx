@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles.css";
 import { TrashIcon } from "./TrashIcon";
 
-export const NewCard = ({ onSaveCard, frontValue }) => {
+export const NewCard = ({ onSaveCard, frontValue, deleteCard  }) => {
   const [showBack, setShowBack] = useState(false);
   const [front, setFront] = useState(frontValue || "");
 
@@ -22,8 +22,8 @@ export const NewCard = ({ onSaveCard, frontValue }) => {
     setFront(event.target.value);
   };
   
-  const handleDeleteClick = () => {
-    console.log("delete click");
+  const handleDeleteCard = () => {
+    deleteCard();
   };
 
 
@@ -54,7 +54,7 @@ export const NewCard = ({ onSaveCard, frontValue }) => {
         style={{ display: showBack ? "block" : "none" }}
       >
         <div className="card-word"></div>
-        <div className="trash-icon" onClick={handleDeleteClick}>
+        <div className="trash-icon" onClick={handleDeleteCard}>
           <TrashIcon />
         </div>
         <form>
