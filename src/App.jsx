@@ -35,7 +35,7 @@ const App = () => {
       <Header onAddCard={handleAddCard} cardsCount={cards.length}/>
       {showNewCard ? <NewCard onSaveCard={handleSaveCard} /> : null}
       <div className="cards-list">
-        {cards.map((card, index) => (
+      {cards.length===0 ? <p className="cards-list">Add your first flashcard</p> : cards.map((card, index) => (
           <Card key={index} front={card.front} back={card.back} />
         ))}
       </div>
