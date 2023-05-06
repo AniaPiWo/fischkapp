@@ -21,7 +21,6 @@ const App = () => {
     localStorage.setItem("cards", JSON.stringify(cards));
   }, [cards]);
 
-
   const handleAddCard = () => {
     setShowNewCard(true);
   };
@@ -42,7 +41,6 @@ const App = () => {
     setCards(updatedCards);
   };
   
-  
   const deleteCard = (id) => {
     setCards(cards.filter((card) => card.id !== id));
     console.log(cards.length);
@@ -51,7 +49,6 @@ const App = () => {
       setShowNewCard(false);
     }
   };
-  
   
   return (
     <div className="app">
@@ -64,13 +61,13 @@ const App = () => {
     ) : null}
 
       <div className="cards-list">
-        {cards.length===0 ? <p className="cards-list">Add your first flashcard</p> : cards.slice().reverse().map((card, id) => (
+        {cards.length===0 ? <p className="cards-list">Add your first flashcard</p> : cards.slice().reverse().map((card) => (
         <Card
           key={card.id}
           front={card.front}
           back={card.back}
           deleteCard={() => deleteCard(card.id)}
-          onEdit={(id, newFront, newBack) => handleEditCard(id, newFront, newBack)}
+          onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
         />
   
         ))}

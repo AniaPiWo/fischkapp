@@ -5,8 +5,8 @@ import { PencilIcon } from "./PencilIcon.jsx";
 import ReactCardFlip from "react-card-flip";
 
 export const Card = ({ id, front, back, deleteCard, onEdit }) => {
-  const [newFront, setNewFront] = useState("");
-  const [newBack, setNewBack] = useState("");
+  const [newFront, setNewFront] = useState(front);
+  const [newBack, setNewBack] = useState(back);
   const [isBack, setIsBack] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
