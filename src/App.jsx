@@ -21,6 +21,7 @@ const App = () => {
     localStorage.setItem("cards", JSON.stringify(cards));
   }, [cards]);
 
+
   const handleAddCard = () => {
     setShowNewCard(true);
   };
