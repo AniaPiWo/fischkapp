@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Header } from "./components/Header.jsx";
 import { NewCard } from "./components/NewCard.jsx";
 import { Card } from "./components/Card.jsx";
+import { nanoid } from "nanoid";
 import "./styles.css";
 
 const App = () => {
@@ -25,24 +26,51 @@ const App = () => {
   };
 
   const handleSaveCard = (front, back) => {
-    const newCard = { front, back };
+    const newCard = { id: nanoid(), front, back };
     setCards([...cards, newCard]);
     setShowNewCard(false);
   };
 
-  const deleteCard = (index) => {
-    setCards(cards.filter((_, i) => i !== index));
+  const handleEditCard = (id, newFront, newBack) => {
+    const updatedCards = cards.map((card) => {
+      if (card.id === id) {
+        return { ...card, front: newFront, back: newBack };
+      }
+      return card;
+    });
+    setCards(updatedCards);
   };
-
+  
+  const deleteCard = (id) => {
+    setCards(cards.filter((card) => card.id !== id));
+    console.log(cards.length);
+  
+    if (!id) {
+      setShowNewCard(false);
+    }
+  };
+  
   return (
     <div className="app">
       <Header onAddCard={handleAddCard} cardsCount={cards.length}/>
-      {showNewCard ? <NewCard onSaveCard={handleSaveCard} /> : null}
-      <div className="cards-list">
-      {cards.length===0 ? <p className="cards-list">Add your first flashcard</p> : cards.map((card, index) => (
-  <Card key={index} front={card.front} back={card.back} deleteCard={() => deleteCard(index)} />
-))}
+      {showNewCard ? (
+      <NewCard
+        onSaveCard={handleSaveCard}
+        deleteCard={deleteCard}
+      />
+    ) : null}
 
+      <div className="cards-list">
+        {cards.length===0 ? <p className="cards-list">Add your first flashcard</p> : cards.slice().reverse().map((card) => (
+        <Card
+          key={card.id}
+          front={card.front}
+          back={card.back}
+          deleteCard={() => deleteCard(card.id)}
+          onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
+        />
+  
+        ))}
       </div>
     </div>
   );

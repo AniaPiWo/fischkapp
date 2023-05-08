@@ -4,74 +4,85 @@ import { TrashIcon } from "./TrashIcon";
 import { PencilIcon } from "./PencilIcon.jsx";
 import ReactCardFlip from "react-card-flip";
 
-export const Card = ({ front, back, deleteCard }) => {
+export const Card = ({ id, front, back, deleteCard, onEdit }) => {
+  const [newFront, setNewFront] = useState(front);
+  const [newBack, setNewBack] = useState(back);
   const [isBack, setIsBack] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const handleSideSwitch = () => {
-    setIsBack(!isBack);
+    if (!isEdit) {
+      setIsBack(!isBack);
+    }
+  };
+
+  const handleSaveEdit = (newFront, newBack) => {
+    onEdit(newFront, newBack);
     setIsEdit(false);
   };
+  
 
-  const handleCardEdit = (event) => {
-    event.stopPropagation();
-    setIsEdit(true);
-    setIsBack(true);
-  };
-
-  const handleCancelEdit = (event) => {
-    event.stopPropagation();
-    setIsBack(false);
-    setIsEdit(false);
-  };
-
-  const handleSaveEdit = (event) => {
-    event.stopPropagation();
-    setIsBack(false);
-    setIsEdit(false);
-  };
-
-  const handleDeleteCard = (event) => {
-    event.stopPropagation();
-    deleteCard();
-  };
+  const handleEdit = (event) => {
+    event.stopPropagation()
+    setIsEdit(true)
+  }
 
   return (
-    <div className="flip-card">
-      <div onClick={handleSideSwitch}>
-        <ReactCardFlip isFlipped={isBack} flipDirection="horizontal">
-          <div id="card-front" className="card read-mode">
-            <div className="pencil-icon" onClick={handleCardEdit}>
-              <PencilIcon />
-            </div>
-            <div>
-              <p>{front}</p>
-            </div>
+    <div className="flip-card" onClick={handleSideSwitch}>
+      <ReactCardFlip
+        isFlipped={isBack}
+        flipDirection="horizontal"
+      >
+      {isEdit && !isBack ? (
+      <div id="card-front" className="card edit-mode">
+        <div className="card-word">{newBack}</div>
+          <div className="trash-icon" onClick={deleteCard}>
+            <TrashIcon />
           </div>
-          {isEdit && isBack ? (
-            <div className="card edit-mode">
-              <div className="trash-icon" onClick={handleDeleteCard}>
-                <TrashIcon />
-              </div>
-              <div>
-                <input defaultValue={back} />
-              </div>
-              <div className="button-box">
-                <button className="btn-1" onClick={handleCancelEdit}>
-                  Cancel
-                </button>
-                <button className="btn-2" onClick={handleSaveEdit}>
-                  Save
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="card read-mode">
-              <p>{back}</p>
-            </div>
-          )}
-        </ReactCardFlip>
+          <div>
+            <input value={newFront} onChange={(e) => setNewFront(e.target.value)} />
+          </div>
+        <div className="button-box">
+          <button className="btn-1" onClick={() => setIsBack(!isBack)}>Back</button>
+          <button className="btn-2" onClick={() => handleSaveEdit(newFront, newBack)}>Save</button>
+        </div>
+      </div>) : (
+        <div id="card-front" className="card read-mode">
+        <div className="pencil-icon" onClick={handleEdit}>
+          <PencilIcon />
+        </div>
+        <div>
+          <p>{front}</p>
+        </div>
       </div>
+      )}
+
+      {isEdit && isBack ? (
+      <div id="card-back" className="card edit-mode">
+      <div className="card-word">{newFront} </div>
+      <div className="trash-icon" onClick={deleteCard}>
+            <TrashIcon />
+          </div>
+        <div>
+          <input value={newBack} onChange={(e) => setNewBack(e.target.value)} />
+        </div>
+        <div className="button-box">
+          <button className="btn-1" onClick={() => setIsBack(!isBack)}>Front</button>
+          <button className="btn-2" onClick={() => setIsEdit(false)}>Cancel</button>
+        </div>
+      </div>) : (
+        <div id="card-back" className="card read-mode">
+        <div className="pencil-icon" onClick={handleEdit}>
+          <PencilIcon />
+        </div>
+        <div>
+          <p>{back}</p>
+        </div>
+      </div>
+      )}
+
+      </ReactCardFlip>
     </div>
   );
 };
+
