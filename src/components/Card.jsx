@@ -42,8 +42,8 @@ export const Card = ({ id, front, back, deleteCard, onEdit }) => {
           <div>
             <input value={newFront} onChange={(e) => setNewFront(e.target.value)} />
           </div>
-        <div className="button-box">
-          <button className="btn-1" onClick={() => setIsBack(!isBack)}>Back</button>
+        <div className="button-box">  
+          <button className="btn-1" onClick={() => setIsEdit(false)}>Cancel</button>       
           <button className="btn-2" onClick={() => handleSaveEdit(newFront, newBack)}>Save</button>
         </div>
       </div>) : (
@@ -67,8 +67,8 @@ export const Card = ({ id, front, back, deleteCard, onEdit }) => {
           <input value={newBack} onChange={(e) => setNewBack(e.target.value)} />
         </div>
         <div className="button-box">
-          <button className="btn-1" onClick={() => setIsBack(!isBack)}>Front</button>
-          <button className="btn-2" onClick={() => setIsEdit(false)}>Cancel</button>
+          <button className="btn-1" onClick={() => setIsEdit(false)}>Cancel</button>
+          <button className="btn-2" onClick={() => handleSaveEdit(newFront, newBack)}>Save</button>
         </div>
       </div>) : (
         <div id="card-back" className="card read-mode">
