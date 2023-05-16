@@ -84,8 +84,6 @@ export const CardsApi = () => {
       ) : (
         <p className="cards-list">Loading data...</p>
       )}  
-
-
     </div>
   );
 };
