@@ -1,59 +1,72 @@
-/* curl -X GET \
-  http://139.59.154.199:49160/api/v1/fischkapp/flashcards */
+import React, { useEffect, useState } from 'react';
+import { Card } from '../Card';
 
-  import React, { useEffect, useState } from 'react';
-  import { Card } from '../Card';
-  
-  export const CardsApi = () => {
-    const [data, setData] = useState(null);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('http://139.59.154.199:49160/api/v1/fischkapp/flashcards');
-          const json = await response.json();
-          setData(json);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }, []);
-  
-    const deleteCard = async (cardId) => {
+export const CardsApi = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        await fetch(`http://139.59.154.199:49160/api/v1/fischkapp/flashcards/${cardId}`, {
-          method: 'DELETE',
-        });
-        setData(data.filter((card) => card.id !== cardId));
+        const response = await fetch('http://139.59.154.199:49160/api/v1/fischkapp/flashcards');
+        const json = await response.json();
+        setData(json);
       } catch (error) {
-        console.error('Error deleting card:', error);
+        console.error('Error fetching data:', error);
       }
     };
-  
-    const handleEditCard = (cardId, newFront, newBack) => {
-      // Implement your card editing logic here
-    };
-  
-    return (
-      <div>
-        {data ? (
-          <ul>
-            {data.map((card) => (
-              <Card  
-                key={card.id}
-                front={card.front}
-                back={card.back}
-                deleteCard={() => deleteCard(card.id)}
-                onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p className="cards-list">Loading data...</p>
-        )}
-      </div>
-    );
+    fetchData();
+  }, []);
+
+  const deleteCard = async (cardId) => {
+    try {
+      await fetch(`http://139.59.154.199:49160/api/v1/fischkapp/flashcards/${cardId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'secret_token',
+            'Content-Type': 'application/json',
+        },
+      });
+      setData(data.filter((card) => card.id !== cardId));
+    } catch (error) {
+      console.error('Error deleting card:', error);
+    }
   };
-  
+
+
+  const addCard = async (front, back) => {
+    try {
+      const response = await fetch('http://139.59.154.199:49160/api/v1/fischkapp/flashcards', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'secret_token',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ front, back }),
+      });
+      const newCard = await response.json();
+      setData([...data, newCard]);
+    } catch (error) {
+      console.error('Error adding card:', error);
+    }
+  };
+
+  return (
+    <div>
+      {data ? (
+        <ul>
+          {data.slice().reverse().map((card) => (
+            <Card
+              key={card.id}
+              front={card.front}
+              back={card.back}
+              deleteCard={() => deleteCard(card.id)}
+              //onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className="cards-list">Loading data...</p>
+      )}
+    </div>
+  );
+};
