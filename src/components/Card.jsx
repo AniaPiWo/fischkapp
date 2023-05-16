@@ -80,7 +80,6 @@ export const Card = ({ id, front, back, deleteCard, onEdit }) => {
         </div>
       </div>
       )}
-
       </ReactCardFlip>
     </div>
   );
