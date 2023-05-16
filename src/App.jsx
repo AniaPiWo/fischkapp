@@ -4,6 +4,7 @@ import { Header } from "./components/Header.jsx";
 import { NewCard } from "./components/NewCard.jsx";
 import { Card } from "./components/Card.jsx";
 import { nanoid } from "nanoid";
+import { CardsApi } from "./components/utils/cardApi.jsx"
 import "./styles.css";
 
 const App = () => {
@@ -61,7 +62,7 @@ const App = () => {
     ) : null}
 
       <div className="cards-list">
-        {cards.length===0 ? <p className="cards-list">Add your first flashcard</p> : cards.slice().reverse().map((card) => (
+        {cards.slice().reverse().map((card) => (
         <Card
           key={card.id}
           front={card.front}
@@ -69,9 +70,9 @@ const App = () => {
           deleteCard={() => deleteCard(card.id)}
           onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
         />
-  
         ))}
       </div>
+      <CardsApi/>
     </div>
   );
 };
