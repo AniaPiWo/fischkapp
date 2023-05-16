@@ -32,9 +32,6 @@ export const CardsApi = () => {
     }
   };
 
-  const handleEditCard = (cardId, newFront, newBack) => {
-    // Implement your card editing logic here
-  };
 
   const addCard = async (front, back) => {
     try {
@@ -63,7 +60,7 @@ export const CardsApi = () => {
               front={card.front}
               back={card.back}
               deleteCard={() => deleteCard(card.id)}
-              onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
+              //onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
             />
           ))}
         </ul>
