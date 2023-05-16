@@ -50,6 +50,23 @@ export const CardsApi = () => {
     }
   };
 
+  const editCard = async (cardId, front, back) => {
+    try {
+      await fetch(`http://139.59.154.199:49160/api/v1/fischkapp/flashcards/${cardId}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': 'secret_token',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ front, back }),
+      });
+      setData(data.map((card) => (card.id === cardId ? { ...card, front, back } : card)));
+    } catch (error) {
+      console.error('Error editing card:', error);
+    }
+  };
+  
+
   return (
     <div>
       {data ? (
@@ -60,13 +77,16 @@ export const CardsApi = () => {
               front={card.front}
               back={card.back}
               deleteCard={() => deleteCard(card.id)}
-              //onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
+              onEdit={(newFront, newBack) => handleEditCard(card.id, newFront, newBack)}
             />
           ))}
         </ul>
       ) : (
         <p className="cards-list">Loading data...</p>
-      )}
+      )}  
     </div>
   );
 };
+
+
+  
