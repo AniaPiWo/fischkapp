@@ -1,7 +1,4 @@
-/* curl -X GET \
-  http://139.59.154.199:49160/api/v1/fischkapp/flashcards */
-
-  import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '../Card';
 
 export const CardsApi = () => {
@@ -17,7 +14,6 @@ export const CardsApi = () => {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -74,25 +70,6 @@ export const CardsApi = () => {
       ) : (
         <p className="cards-list">Loading data...</p>
       )}
-
-      <div>
-        <h3>Add New Card</h3>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          const front = e.target.front.value;
-          const back = e.target.back.value;
-          addCard(front, back);
-          e.target.reset();
-        }}>
-          <label htmlFor="front">Front:</label>
-          <input type="text" id="front" name="front" required />
-          <br />
-          <label htmlFor="back">Back:</label>
-          <input type="text" id="back" name="back" required />
-          <br />
-          <button type="submit">Add Card</button>
-        </form>
-      </div>
     </div>
   );
 };
