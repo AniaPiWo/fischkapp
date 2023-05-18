@@ -4,7 +4,7 @@ import { TrashIcon } from "./TrashIcon";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const NewCard = ({ onSaveCard, deleteCard, id }) => {
+export const NewCard = ({ onSaveCard, deleteCard }) => {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
   const [isBack, setIsBack] = useState(false);
@@ -52,7 +52,7 @@ export const NewCard = ({ onSaveCard, deleteCard, id }) => {
           />
         </form>
         <div className="button-box">
-          <button className="btn-1" onClick={() => deleteCard(id)}>
+          <button className="btn-1" onClick={() => deleteCard()}>
             Cancel
           </button>
           <button className="btn-2" onClick={() => setIsBack(true)}>
@@ -66,7 +66,7 @@ export const NewCard = ({ onSaveCard, deleteCard, id }) => {
         style={{ display: isBack ? "block" : "none" }}
       >
         <div className="card-word">{front}</div>
-        <div className="trash-icon" onClick={() => deleteCard(id)}>
+        <div className="trash-icon" onClick={() => deleteCard()}>
           <TrashIcon />
         </div>
         <form onSubmit={handleSave} required>
