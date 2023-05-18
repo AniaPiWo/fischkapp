@@ -35,7 +35,7 @@ export const Card = ({ id, front, back, deleteCard, onEdit }) => {
       >
       {isEdit && !isBack ? (
       <div id="card-front" className="card edit-mode">
-        <div className="card-word">{newBack}</div>
+     
           <div className="trash-icon" onClick={deleteCard}>
             <TrashIcon />
           </div>
