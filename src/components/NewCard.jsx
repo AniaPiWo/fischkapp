@@ -70,12 +70,18 @@ export const NewCard = ({ onSaveCard, deleteCard }) => {
           <TrashIcon />
         </div>
         <form onSubmit={handleSave} required>
-          <input 
-            id="set-back" 
-            value={back} 
-            onChange={(e) => setBack(e.target.value)} 
+        <input
+            id="set-back"
+            value={back}
+            onChange={(e) => setBack(e.target.value)}
             required
-          />
+            ref={(input) => {
+            if (input) {
+              const valueLength = input.value.length;
+              input.style.width = valueLength > 0 ? `${valueLength * 8}px` : 'auto';
+            }
+        }}
+        />
         </form>
         <div className="button-box">
           <button className="btn-1" onClick={() => setIsBack(false)}>

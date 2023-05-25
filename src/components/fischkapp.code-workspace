@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "fischkapp",
+			"path": "../.."
+		},
+		{
+			"name": ".github",
+			"path": "../../../fischkapp-kopia ver2/.github"
+		},
+		{
+			"name": ".git",
+			"path": "../../../fischkapp-kopia ver2/.git"
+		}
+	],
+	"settings": {}
+}
