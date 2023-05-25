@@ -94,7 +94,7 @@ const App = () => {
       deleteCard={handleCancelCard}
     />
   ) : null}
-
+  {cards.length !== 0 ?
     <div className="cards-list">
       {cards.slice().reverse().map((card) => (
       <Card
@@ -104,8 +104,8 @@ const App = () => {
         deleteCard={() => deleteCard(card._id)}
         onEdit={(newFront, newBack) => handleEditCard(card._id, newFront, newBack)}
       />
-    ))}
-    </div>
+    ))} 
+    </div> : <div className="cards-list">We found nothing!</div>}
     </div>
   );
 };
